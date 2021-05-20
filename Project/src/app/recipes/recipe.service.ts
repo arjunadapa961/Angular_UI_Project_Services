@@ -8,7 +8,7 @@ import { Recipe } from './recipe.model';
   providedIn: 'root'
 })
 export class RecipeService {
-
+  recipeChanged = new Subject<Recipe[]>()
 
   private recipes: Recipe[] = [
     new Recipe("Kebab",
@@ -40,5 +40,20 @@ export class RecipeService {
 
   onAddIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.onAddIngredientsToShoppingList(ingredients)
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe)
+    this.recipeChanged.next(this.recipes.slice())
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe
+    this.recipeChanged.next(this.recipes.slice())
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1)
+    this.recipeChanged.next(this.recipes.slice())
   }
 }

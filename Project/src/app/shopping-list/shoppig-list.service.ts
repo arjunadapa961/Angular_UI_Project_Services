@@ -7,6 +7,7 @@ import { Ingredient } from './Ingredient.model';
 })
 export class ShoppigListService {
   ingredientsChanged = new Subject<Ingredient[]>()
+  startEditing = new Subject<number>();
 
   private ingredients: Ingredient[] = [
     new Ingredient("Apple", 5),
@@ -19,6 +20,10 @@ export class ShoppigListService {
     return this.ingredients.slice()
   }
 
+  getIngredientsEditedItem(index: number) {
+    return this.ingredients[index]
+  }
+
   onAddIngredients(ingredient: Ingredient) {
     this.ingredients.push(ingredient)
     this.ingredientsChanged.next(this.ingredients.slice())
@@ -26,6 +31,16 @@ export class ShoppigListService {
 
   onAddIngredientsToShoppingList(ingredient: Ingredient[]) {
     this.ingredients.push(...ingredient);
+    this.ingredientsChanged.next(this.ingredients.slice())
+  }
+
+  onUpdateIngredients(index: number, newIngredient: Ingredient) {
+    this.ingredients[index] = newIngredient;
+    this.ingredientsChanged.next(this.ingredients.slice())
+  }
+
+  onDeleteIngredients(index: number) {
+    this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice())
   }
 
