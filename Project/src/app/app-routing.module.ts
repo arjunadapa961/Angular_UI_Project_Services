@@ -12,7 +12,7 @@ import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 const appRoutes: Routes = [
     { path: "", redirectTo: "/recipes", pathMatch: "full" },
     {
-        path: "recipes", component: RecipesComponent, canActivate: [AuthGaurdService], children: [
+        path: "recipes", component: RecipesComponent, canActivate: [AuthGaurdService], resolve: [RecipeResolverService], children: [
             { path: "", component: RecipeStartComponent },
             { path: "new", component: RecipeEditComponent },
             { path: ":id", component: RecipeDetailComponent, resolve: [RecipeResolverService] },

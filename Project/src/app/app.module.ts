@@ -20,6 +20,8 @@ import { ShoppigListService } from './shopping-list/shoppig-list.service';
 import { Authentication } from './authentication/auth.component';
 import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptor } from './authentication/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AuthInterceptor } from './authentication/auth-interceptor.service';
     RecipeStartComponent,
     RecipeEditComponent,
     Authentication,
-    LoadingSpinner
+    LoadingSpinner,
+    AlertComponent,
+    PlaceHolderDirective
   ],
   imports: [
     BrowserModule,
