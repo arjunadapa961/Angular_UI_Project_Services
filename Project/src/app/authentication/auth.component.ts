@@ -40,7 +40,6 @@ export class Authentication implements OnInit, OnDestroy {
         if (!form.valid) {
             return;
         }
-
         const email = form.value.email;
         const password = form.value.password;
 
@@ -62,8 +61,8 @@ export class Authentication implements OnInit, OnDestroy {
             errorMessage => {
                 console.log(errorMessage)
                 // this.errorMessage = errorMessage
-                this.showAlertError(errorMessage)
                 this.isLoading = false
+                this.showAlertError(errorMessage)
             }
         )
         form.reset()

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Ingredient } from 'src/app/shopping-list/Ingredient.model';
 import { ShoppigListService } from 'src/app/shopping-list/shoppig-list.service';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -36,7 +37,19 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
+    debugger
     this.recipeService.deleteRecipe(this.id)
+    let deletingIngd = this.recipe.ingredient
+    let ingredient: Ingredient[] = this.shoppingListService.getIngredients()
+    for (let j = 0; j < ingredient.length; j++) {
+      for (let i = 0; i < deletingIngd.length; i++) {
+        if (deletingIngd[i].name === ingredient[j].name) {
+          const updateIngredients = this.shoppingListService.onDeleteIngredients(j)
+          // deletingIngd.splice(i, 1)
+          ingredient = updateIngredients
+        }
+      }
+    }
     // let x = this.recipe.ingredient;
     // // for (let i = 0; i < x.length; i++) {
     // //   this.shoppingListService.onDeleteIngredients(i)

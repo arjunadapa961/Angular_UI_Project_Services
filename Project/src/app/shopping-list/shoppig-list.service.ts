@@ -9,10 +9,7 @@ export class ShoppigListService {
   ingredientsChanged = new Subject<Ingredient[]>()
   startEditing = new Subject<number>();
 
-  private ingredients: Ingredient[] = [
-    new Ingredient("Apple", 5),
-    new Ingredient("Tomatoes", 5)
-  ]
+  private ingredients: Ingredient[] = []
 
   constructor() { }
 
@@ -40,8 +37,10 @@ export class ShoppigListService {
   }
 
   onDeleteIngredients(index: number) {
+    debugger;
     this.ingredients.splice(index, 1);
     this.ingredientsChanged.next(this.ingredients.slice())
+    return this.ingredients
   }
 
 }
